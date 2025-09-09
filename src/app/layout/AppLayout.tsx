@@ -1,4 +1,3 @@
-import { type PropsWithChildren } from "react";
 import {
   Box,
   AppBar, 
@@ -20,13 +19,15 @@ import CloudUploadOutlinedIcon from '@mui/icons-material/CloudUploadOutlined';
 import GavelOutlinedIcon from '@mui/icons-material/GavelOutlined';
 import ReportProblemOutlinedIcon from '@mui/icons-material/ReportProblemOutlined';
 import FactCheckOutlinedIcon from '@mui/icons-material/FactCheckOutlined';
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Outlet } from "react-router-dom";
 import { useUIStore } from "../../store/ui";
+import { useAuthStore } from "../../store/auth";
 
 const drawerWidth = 250;
 
-export default function AppLayout({ children }: PropsWithChildren) {
+export default function AppLayout() {
   const { drawerOpen, toggleDrawer } = useUIStore();
+  const { user, logout } = useAuthStore();
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
@@ -80,11 +81,12 @@ export default function AppLayout({ children }: PropsWithChildren) {
           <Box sx={{ py: 2, display: 'flex', alignItems: 'center' }}>
             <Avatar />
             <Box sx={{ ml: 2 }}>
-              <Typography variant="subtitle1">username</Typography>
-              <Typography variant="body2">user@example.com</Typography>
+              <Typography variant="subtitle1">{user?.name}</Typography>
+              <Typography variant="body2">{user?.email}</Typography>
+              <Typography variant="subtitle2">{user?.role}</Typography>
             </Box>
           </Box>
-          <Button variant="outlined" fullWidth onClick={() => alert('Sign out clicked')}>
+          <Button variant="outlined" fullWidth onClick={logout}>
             Sign Out
           </Button>
         </Box>
@@ -92,7 +94,7 @@ export default function AppLayout({ children }: PropsWithChildren) {
 
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
-        {children}
+        <Outlet />
       </Box>
     </Box>
   );

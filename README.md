@@ -4,9 +4,11 @@ A compliance monitoring engine that ingests trade/position data, applies configu
 
 ## Repositories
 **Frontend**
+
 regula-fe-react (https://github.com/theutkarshsoni/regula-fe-react)
 
 **Backend**
+
 regula-be (https://github.com/theutkarshsoni/regula-be)
 
 ## Use Case
@@ -41,5 +43,20 @@ This mirrors real-world compliance monitoring similar to what regulators and ris
 6. Breach management & audit log  
 7. Validation, auth & polish  
 8. Search & Analytics (Elasticsearch integration) 
+
+# 🚀 Design Decisions in Practice
+
+## Handling Auth Flow: Protected vs AppLayout
+
+- At first, I wrapped `<AppLayout>` around the routes and placed `<Protected>` inside.  
+- This caused the **sidebar and topbar to render even when the user wasn’t authenticated**, leading to confusing redirects and blank states.  
+- I used `console.log` inside the components to trace where the flow broke and confirmed the auth check was happening *after* the shell was already rendered.  
+- After some debugging, I flipped the structure:  
+  ```tsx
+  <Route element={<Protected />}>
+    <Route element={<AppLayout />}>
+      {/* protected routes */}
+    </Route>
+  </Route>
 
 ---
