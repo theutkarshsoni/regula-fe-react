@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
-import CloudUploadOutlinedIcon from '@mui/icons-material/CloudUploadOutlined';
+import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
 import GavelOutlinedIcon from '@mui/icons-material/GavelOutlined';
 import ReportProblemOutlinedIcon from '@mui/icons-material/ReportProblemOutlined';
 import FactCheckOutlinedIcon from '@mui/icons-material/FactCheckOutlined';
@@ -33,7 +33,7 @@ export default function AppLayout() {
 
   const pages = [
     { to: "/dashboard", label: "Dashboard", icon: <DashboardOutlinedIcon /> },
-    { to: "/upload", label: "Upload", icon: <CloudUploadOutlinedIcon /> },
+    { to: "/positions", label: "Positions", icon: <TableChartOutlinedIcon /> },
     { to: "/rules", label: "Rules", icon: <GavelOutlinedIcon /> },
     { to: "/breaches", label: "Breaches", icon: <ReportProblemOutlinedIcon /> },
     { to: "/audit", label: "Audit", icon: <FactCheckOutlinedIcon /> },
